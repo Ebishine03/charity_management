@@ -1,0 +1,245 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block title %} Charity Management {% endblock %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'css/list.css' %}">{% endblock %}
+{% block content %}
+ 
+
+
+
+
+
+
+<!-- <div class="row">
+    <div class="col-12 grid-margin">
+        <div class="table-responsive">
+            <table class="tbl" style="width: 100%; border-collapse: separate; border-spacing: 0 10px; margin: 0;">
+                <thead>
+                    <tr style="background-color: #f9f9f9; text-align: left;">
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Id</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Image</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Name</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Email</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Phone</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Age</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Place</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Pin</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Gender</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Category</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Acct No</th>
+                        <th style="padding: 12px; font-weight: 600; color: #555;">Donate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in form %}
+                    <tr style="background-color: #fff; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);">
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.id }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">
+                            {% if i.user_img %}
+                            <img src="{{ i.user_img.url }}" alt="{{ i.name }}" width="50" height="50" style="border-radius: 8px;">
+                            {% else %}
+                            <span style="color: #999;">No Image</span>
+                            {% endif %}
+                        </td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.name }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.email }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.phone }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.age }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.place }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.pin }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.gender }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.user_req_category }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">{{ i.bank_account }}</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">
+                            <a class="btn btn-primary" href="{% url 'donate' i.id %}" style="padding: 8px 12px; background-color: #007bff; border-radius: 5px; color: #fff; text-decoration: none;">Donate</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->
+<h3 class="text-center" style="margin-top: 144px;">List of Beneficiaries and Money They needed</h3>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="d-flex justify-content-center">
+          <!-- Search Bar with Button -->
+          <div class="input-group">
+            <input type="text" id="search" class="form-control" placeholder="Search...">
+            <button class="btn btn-primary" type="button" id="search-button">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container mt-5 mb-3">
+    <div class="row
+    ">
+    <div class="col-md-4">
+        <div class="card p-3 mb-2">
+            <div class="d-flex flex-column h-100">
+                <!-- Top section: Image and basic info -->
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3">
+                        <img src="https://s.yimg.com/fz/api/res/1.2/Bu_5wX1X0.agD6ljHmztBw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI2MDtxPTgwO3c9MTk0/https://s.yimg.com/zb/imgv1/927f7f57-ef17-3a8b-add5-09d2d2908d88/t_500x300" alt="Profile Image" class="img-fluid profile-img">
+                    </div>
+                    <div>
+                        
+                        <p><strong>ID:</strong> 12345</p>
+                    <p><strong>Email:</strong> john.doe@example.com</p>
+                    <p><strong>Phone:</strong> +1234567890</p>
+                    <p><strong>Place:</strong> Singapore</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Acct No:</strong> 9876543210</p>
+                    </div>
+                </div>
+                
+                <!-- Middle section: Text Content -->
+                <div class="mb-3">
+                    <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Age:</strong> 30</p>
+                    <p><strong>Category:</strong> Design</p>
+                </div>
+                
+                <!-- Bottom section: Progress bar and donate button -->
+                <div class="mt-auto d-flex flex-column align-items-center justify-content-end">
+                    <div class="w-100 mb-2 d-flex justify-content-center">
+                        <div class="progress w-75">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <span class="text1 mb-2">20 collected of 50</span>
+                    <a class="btn btn-primary" href="#">Donate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 mb-2">
+            <div class="d-flex flex-column h-100">
+                <!-- Top section: Image and basic info -->
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3">
+                        <img src="https://s.yimg.com/fz/api/res/1.2/Bu_5wX1X0.agD6ljHmztBw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI2MDtxPTgwO3c9MTk0/https://s.yimg.com/zb/imgv1/927f7f57-ef17-3a8b-add5-09d2d2908d88/t_500x300" alt="Profile Image" class="img-fluid profile-img">
+                    </div>
+                    <div>
+                        
+                        <p><strong>ID:</strong> 12345</p>
+                    <p><strong>Email:</strong> john.doe@example.com</p>
+                    <p><strong>Phone:</strong> +1234567890</p>
+                    <p><strong>Place:</strong> Singapore</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Acct No:</strong> 9876543210</p>
+                    </div>
+                </div>
+                
+                <!-- Middle section: Text Content -->
+                <div class="mb-3">
+                    <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Age:</strong> 30</p>
+                    <p><strong>Category:</strong> Design</p>
+                </div>
+                
+                <!-- Bottom section: Progress bar and donate button -->
+                <div class="mt-auto d-flex flex-column align-items-center justify-content-end">
+                    <div class="w-100 mb-2 d-flex justify-content-center">
+                        <div class="progress w-75">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <span class="text1 mb-2">20 collected of 50</span>
+                    <a class="btn btn-primary" href="#">Donate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 mb-2">
+            <div class="d-flex flex-column h-100">
+                <!-- Top section: Image and basic info -->
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3">
+                        <img src="https://s.yimg.com/fz/api/res/1.2/Bu_5wX1X0.agD6ljHmztBw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI2MDtxPTgwO3c9MTk0/https://s.yimg.com/zb/imgv1/927f7f57-ef17-3a8b-add5-09d2d2908d88/t_500x300" alt="Profile Image" class="img-fluid profile-img">
+                    </div>
+                    <div>
+                        
+                        <p><strong>ID:</strong> 12345</p>
+                    <p><strong>Email:</strong> john.doe@example.com</p>
+                    <p><strong>Phone:</strong> +1234567890</p>
+                    <p><strong>Place:</strong> Singapore</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Acct No:</strong> 9876543210</p>
+                    </div>
+                </div>
+                
+                <!-- Middle section: Text Content -->
+                <div class="mb-3">
+                    <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Age:</strong> 30</p>
+                    <p><strong>Category:</strong> Design</p>
+                </div>
+                
+                <!-- Bottom section: Progress bar and donate button -->
+                <div class="mt-auto d-flex flex-column align-items-center justify-content-end">
+                    <div class="w-100 mb-2 d-flex justify-content-center">
+                        <div class="progress w-75">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <span class="text1 mb-2">20 collected of 50</span>
+                    <a class="btn btn-primary" href="#">Donate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 mb-2">
+            <div class="d-flex flex-column h-100">
+                <!-- Top section: Image and basic info -->
+                <div class="d-flex align-items-start mb-3">
+                    <div class="me-3">
+                        <img src="https://s.yimg.com/fz/api/res/1.2/Bu_5wX1X0.agD6ljHmztBw--~C/YXBwaWQ9c3JjaGRkO2ZpPWZpdDtoPTI2MDtxPTgwO3c9MTk0/https://s.yimg.com/zb/imgv1/927f7f57-ef17-3a8b-add5-09d2d2908d88/t_500x300" alt="Profile Image" class="img-fluid profile-img">
+                    </div>
+                    <div>
+                        
+                        <p><strong>ID:</strong> 12345</p>
+                    <p><strong>Email:</strong> john.doe@example.com</p>
+                    <p><strong>Phone:</strong> +1234567890</p>
+                    <p><strong>Place:</strong> Singapore</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Acct No:</strong> 9876543210</p>
+                    </div>
+                </div>
+                
+                <!-- Middle section: Text Content -->
+                <div class="mb-3">
+                    <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Age:</strong> 30</p>
+                    <p><strong>Category:</strong> Design</p>
+                </div>
+                
+                <!-- Bottom section: Progress bar and donate button -->
+                <div class="mt-auto d-flex flex-column align-items-center justify-content-end">
+                    <div class="w-100 mb-2 d-flex justify-content-center">
+                        <div class="progress w-75">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <span class="text1 mb-2">20 collected of 50</span>
+                    <a class="btn btn-primary" href="#">Donate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
